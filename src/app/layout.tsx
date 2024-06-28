@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import { Providers } from "./reduxProviders";
+import Popup from "@/components/popup";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,9 @@ export default function RootLayout({
           <div className="flex basis-full h-screen flex-col">
             <div className="flex-1 basis-1/12" style={{ flexBasis: 'auto' }}>
               <Header />
+            </div>
+            <div>
+              <Popup/>
             </div>
             <div className="flex basis-11/12">
               {children}

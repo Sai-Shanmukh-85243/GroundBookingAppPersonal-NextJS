@@ -1,0 +1,1 @@
+export const POPUP_NAME = 'popup';

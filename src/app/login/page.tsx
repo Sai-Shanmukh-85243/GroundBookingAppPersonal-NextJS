@@ -2,10 +2,24 @@
 
 import Link from "next/link";
 import background from '../../../public/images/solarsystem1.jpg';
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { checkLoginData, LoginSelector } from "@/redux/slices/loginSlice";
+import { loginInputModel } from "@/models/loginInputModel";
 
 const Login = () => {
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+    const dispatch = useAppDispatch();
+
     function HandleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        let data: loginInputModel = {
+            username,
+            password
+        }
+        dispatch(checkLoginData(data))
     }
     return (
         <div className="flex basis-full h-full w-full justify-center items-center">
@@ -15,14 +29,14 @@ const Login = () => {
                         <span className="form_label">
                             Username:
                         </span>
-                        <input className="form_input" type='text'>
+                        <input required onChange={(e) => { setUsername(e.target.value) }} className="form_input" type='text'>
                         </input>
                     </label>
                     <label className="mt-2">
                         <span className="form_label">
                             Password:
                         </span>
-                        <input className="form_input" type='password'>
+                        <input required onChange={(e) => { setPassword(e.target.value) }} className="form_input" type='password'>
                         </input>
                     </label>
                     <div className="mt-5 flex justify-center">

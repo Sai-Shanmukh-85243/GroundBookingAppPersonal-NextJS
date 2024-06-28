@@ -54,7 +54,7 @@ const About = () => {
                 </div>
             </div>
             <div className="-z-10 opacity-10">
-                <Image src='/images/cricket1.png' alt='cricket' layout="fill" />
+                <Image src='/images/cricket1.png' alt='cricket' fill />
             </div>
         </div>
     )

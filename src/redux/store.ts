@@ -1,12 +1,26 @@
 'use client'
 import { configureStore } from "@reduxjs/toolkit";
 import { LoginReducer } from "./slices/loginSlice";
+import createSagaMiddleware from 'redux-saga';
+import { RootSaga } from "./rootSaga";
+import { popupReducer } from "./slices/popupSlice";
+import { signUpReducer } from "./slices/signupSlice";
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
     reducer:{
         login:LoginReducer,
-    }
+        popup:popupReducer,
+        signup:signUpReducer,
+    },
+    middleware:(getDefaultMiddleware)=>
+        getDefaultMiddleware({
+            thunk:false
+        }).concat(sagaMiddleware)
 })
+
+sagaMiddleware.run(RootSaga)
 
 export type RootState =ReturnType<typeof store.getState>;
 export type AppDispatch =typeof store.dispatch;

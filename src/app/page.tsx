@@ -19,10 +19,10 @@ export default function Home() {
         <div className="hidden xl:flex justify-center w-full h-full">
           <div className="card">
             <div className="homeCardFront">
-              <Image src='/images/football3.png' alt='football' layout="fill"/>
+              <Image src='/images/football3.png' alt='football' fill/>
             </div>
             <div className="homeCardBack">
-            <Image src='/images/football3.png' alt='football' layout="fill"/>
+            <Image src='/images/football3.png' alt='football' fill/>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function Home() {
         </Link>
       </div>
       <div className="-z-10 opacity-10">
-        <Image src='/images/football1.png' alt='football' layout="fill" />
+        <Image src='/images/football1.png' alt='football' fill />
       </div>
     </div>
   );
