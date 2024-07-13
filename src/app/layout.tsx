@@ -26,7 +26,7 @@ export default function RootLayout({
             <div className="gradient"></div>
           </div>
           <div className="flex basis-full h-screen flex-col">
-            <div className="flex-1 basis-1/12" style={{ flexBasis: 'auto' }}>
+            <div className="flex-1 basis-1/12 sticky" style={{ flexBasis: 'auto' }}>
               <Header />
             </div>
             <div>

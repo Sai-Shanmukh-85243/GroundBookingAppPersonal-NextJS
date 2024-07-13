@@ -74,12 +74,10 @@
   @apply font-semibold font-serif text-red-950 text-sm
 }
 
-.login_button{
-  @apply px-5 py-2 mt-5 rounded-md text-sm border-2 border-slate-700 text-slate-700 relative overflow-hidden
-  before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-slate-700 before:transition-all before:duration-500 before:-z-[1] before:-translate-x-[100%]
-  hover:before:translate-x-0
-  hover:text-white
+.login_button {
+  @apply px-5 py-2 mt-5 rounded-md text-sm border-2 border-slate-700 text-slate-700 relative overflow-hidden before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-slate-700 before:transition-all before:duration-500 before:-z-[1] before:-translate-x-[100%] hover:before:translate-x-0 hover:text-white
 }
+
 /* .login_button {
   --comment this line @apply px-5 py-2 mt-5 rounded-md text-sm bg-slate-700 text-orange-300 ; 
   --comment this line hover:bg-orange-300 hover:text-slate-700  
@@ -145,37 +143,261 @@
 }
 
 .signUp_button {
-  @apply px-5 py-2 mt-5 rounded-md text-sm border-2 border-purple-700 text-purple-700 relative overflow-hidden
- before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-purple-700 before:transition-all before:duration-500 before:-z-[1] before:-translate-x-[100%]
- hover:before:translate-x-0
- hover:text-white
+  @apply px-5 py-2 mt-5 rounded-md text-sm border-2 border-purple-700 text-purple-700 relative overflow-hidden before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-purple-700 before:transition-all before:duration-500 before:-z-[1] before:-translate-x-[100%] hover:before:translate-x-0 hover:text-white
 }
 
-.card{
+.card {
   @apply h-full w-1/2 relative transition-all duration-[0.8s] ease-in;
   transform-style: preserve-3d;
 }
-.card:hover{
+
+.card:hover {
   transform: rotateY(180deg);
   cursor: pointer;
 }
 
-.homeCardFront{
+.homeCardFront {
   @apply rounded-full w-full h-full flex items-center justify-center absolute z-[2];
-   backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-.homeCardBack{
+.homeCardFrontImage{
+  filter: drop-shadow(10px 10px 10px black);
+}
+
+.homeCardBack {
   @apply rounded-full w-full h-full flex items-center justify-center absolute z-[1];
   /* transform: rotateY(180deg); */
 }
 
-.points{
+.homeCardBackImage:hover{
+  filter: drop-shadow(10px 10px 10px black);
+}
+
+.points {
   display: flex;
 }
 
-.points::before{
-  content: '\f00c'; 
-  margin-right:10px; 
+.points::before {
+  content: '\f00c';
+  margin-right: 10px;
   font-family: FontAwesome;
+}
+
+.AllGroundsGridContainer {
+  @apply w-full h-full p-10 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 place-items-center gap-5;
+  box-shadow: 5px 5px 20px 10px gray inset,-1px -5px 20px 10px gray inset;/*-0.1px -0.1px 20px black*/
+}
+
+.AllGroundsGridItem {
+  @apply w-full h-full;
+}
+
+.GroundCardsContainer {
+  @apply h-80 w-full flex justify-center items-center border-[0.15rem] border-black;
+  box-shadow: 10px 10px 20px 5px black;
+}
+
+.GroundCards {
+  @apply flex flex-col md:px-5 2xl:px-10 justify-center text-left text-white border-[0.1rem] p-3 backdrop-blur-sm bg-black bg-opacity-50
+}
+
+.groundcard_text {
+  @apply font-serif text-sm
+}
+
+.groundcard_text::first-letter {
+  text-transform: uppercase;
+}
+
+.groundcard_label {
+  @apply text-sm whitespace-nowrap font-serif
+}
+
+.GroundCard_button{
+  @apply text-[0.8rem] p-2 mt-3 border-2 rounded-md bg-gray-600 hover:bg-blue-500
+}
+
+.BookGround_button{
+  @apply relative text-black p-2 border-2 border-black rounded-md overflow-hidden
+}
+
+.BookGround_button::before{
+  @apply w-full h-full absolute content-[""] top-0 left-0 bg-green-700 -translate-x-[101%] -z-[1] duration-[0.5s] transition-all ease-in
+}
+
+.BookGround_button:hover{
+  @apply text-white
+}
+
+.BookGround_button::before:hover{
+  @apply translate-x-[0%] 
+}
+
+.LoadingContainer {
+  @apply flex justify-center items-center h-full w-full
+}
+
+.LoadingDiv {
+  position: relative;
+  margin: 10px;
+  background-color: transparent;
+}
+
+.Loading {
+  @apply font-serif font-thin;
+  font-size: 50px;
+  margin: 0;
+  position: relative;
+  z-index: 3;
+  padding: 20px;
+  background-color: #060C1F;
+  color: #fff;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.Loading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 50%;
+  -webkit-box-shadow: 0 0 17px 3px #ffff01, 0 0 4px 2px #ffff01;
+  box-shadow: 0 0 17px 3px #ffff01, 0 0 4px 2px #ffff01;
+  z-index: -1;
+  -webkit-animation-name: yellow-shadow;
+  animation-name: yellow-shadow;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.Loading::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 50%;
+  -webkit-box-shadow: 0 0 17px 3px #0ff, 0 0 4px 2px #0ff;
+  box-shadow: 0 0 17px 3px #0ff, 0 0 4px 2px #0ff;
+  z-index: -1;
+  -webkit-animation-name: cyan-shadow;
+  animation-name: cyan-shadow;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+@-webkit-keyframes yellow-shadow {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 50%;
+    left: 0;
+  }
+  50% {
+    top: 50%;
+    left: 50%;
+  }
+  75% {
+    top: 0;
+    left: 50%;
+  }
+  100% {
+    top: 0;
+    left: 0;
+  }
+}
+
+@keyframes yellow-shadow {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 50%;
+    left: 0;
+  }
+  50% {
+    top: 50%;
+    left: 50%;
+  }
+  75% {
+    top: 0;
+    left: 50%;
+  }
+  100% {
+    top: 0;
+    left: 0;
+  }
+}
+
+@-webkit-keyframes cyan-shadow {
+  0% {
+    right: 0;
+    bottom: 0;
+  }
+  25% {
+    right: 0;
+    bottom: 50%;
+  }
+  50% {
+    right: 50%;
+    bottom: 50%;
+  }
+  75% {
+    right: 50%;
+    bottom: 0;
+  }
+  100% {
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@keyframes cyan-shadow {
+  0% {
+    right: 0;
+    bottom: 0;
+  }
+  25% {
+    right: 0;
+    bottom: 50%;
+  }
+  50% {
+    right: 50%;
+    bottom: 50%;
+  }
+  75% {
+    right: 50%;
+    bottom: 0;
+  }
+  100% {
+    right: 0;
+    bottom: 0;
+  }
 }

@@ -19,7 +19,7 @@ const Nav = () => {
 
     useEffect(() => {
         if (loginData.status) {
-            router.push("/");
+            router.replace("/");
         }
     }, [loginData]);
 
@@ -43,7 +43,7 @@ const Nav = () => {
             type:'success'
         }
         dispatch(setPopup(popup))
-        router.push('/login');
+        router.replace('/login');
     }
 
     return (

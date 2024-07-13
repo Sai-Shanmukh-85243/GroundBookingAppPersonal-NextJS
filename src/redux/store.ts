@@ -5,6 +5,9 @@ import createSagaMiddleware from 'redux-saga';
 import { RootSaga } from "./rootSaga";
 import { popupReducer } from "./slices/popupSlice";
 import { signUpReducer } from "./slices/signupSlice";
+import { groundsReducers } from "./slices/groundsSlice";
+import { BookGroundReducer } from "./slices/bookGroundSlice";
+import { StatusReducer } from "./slices/statusSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,6 +16,9 @@ export const store = configureStore({
         login:LoginReducer,
         popup:popupReducer,
         signup:signUpReducer,
+        grounds:groundsReducers,
+        bookgrounds:BookGroundReducer,
+        status:StatusReducer
     },
     middleware:(getDefaultMiddleware)=>
         getDefaultMiddleware({

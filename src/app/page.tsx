@@ -19,10 +19,10 @@ export default function Home() {
         <div className="hidden xl:flex justify-center w-full h-full">
           <div className="card">
             <div className="homeCardFront">
-              <Image src='/images/football3.png' alt='football' fill/>
+              <Image className="homeCardFrontImage" src='/images/football3.png' alt='football' fill/>
             </div>
             <div className="homeCardBack">
-            <Image src='/images/football3.png' alt='football' fill/>
+            <Image className="homeCardBackImage" src='/images/football3.png' alt='football' fill/>
             </div>
           </div>
         </div>
