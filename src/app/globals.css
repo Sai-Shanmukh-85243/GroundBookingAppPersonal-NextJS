@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('utility.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -234,6 +235,20 @@
   @apply translate-x-[0%] 
 }
 
+.MyBookings_Heading{
+  @apply whitespace-nowrap font-bold text-lg font-serif bg-gradient-to-r from-red-500 to-green-400 text-transparent bg-clip-text
+}
+
+.MyBookingsCard_Container{
+  @apply h-full w-full border-2 border-black;
+  box-shadow: 20px 20px 50px black;
+}
+
+.MyBookingsCard_form{
+  @apply my-3 grid sm:grid-rows-4 gap-5 sm:grid-flow-col text-white backdrop-blur-sm border-2 rounded-md p-3;
+  box-shadow: 3px 3px 20px white;
+}
+
 .LoadingContainer {
   @apply flex justify-center items-center h-full w-full
 }
@@ -401,3 +416,4 @@
     bottom: 0;
   }
 }
+

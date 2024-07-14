@@ -8,6 +8,7 @@ import { signUpReducer } from "./slices/signupSlice";
 import { groundsReducers } from "./slices/groundsSlice";
 import { BookGroundReducer } from "./slices/bookGroundSlice";
 import { StatusReducer } from "./slices/statusSlice";
+import { MyBookingsReducer } from "./slices/myBookingsSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,7 +19,8 @@ export const store = configureStore({
         signup:signUpReducer,
         grounds:groundsReducers,
         bookgrounds:BookGroundReducer,
-        status:StatusReducer
+        status:StatusReducer,
+        mybookings:MyBookingsReducer
     },
     middleware:(getDefaultMiddleware)=>
         getDefaultMiddleware({
