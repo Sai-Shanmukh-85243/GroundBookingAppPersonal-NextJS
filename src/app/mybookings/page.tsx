@@ -54,20 +54,63 @@ const MyBookings = () => {
         setIndex((prev) => { return prev + 1 })
     }
 
-    async function handleDownload(){
+    async function handleDownload() {
+        const groundData: mybookingOutputModel = MyBookingReverse[index];
         const pdfDoc = await PDFDocument.create();
         //[595, 842] is standarad A4 size page dimensions
         const page = pdfDoc.addPage([595, 842]);
-        page.drawText(MyBookingReverse[index].groundDetails.groundName,{
-            x:50,
-            y:350,
-            size:20,
-            color:rgb(0,0,0)
+
+        const base64Image = `data:image/jpeg;base64,${groundData.groundDetails.image}`
+        const backgroundImage = await pdfDoc.embedJpg(base64Image);
+        const { width, height } = backgroundImage.scale(1);
+        page.drawImage(backgroundImage, {
+            x: 0,
+            y: 0,
+            width: page.getWidth(),
+            height: page.getHeight(),
         });
-        const pdfBytes =await pdfDoc.save();
+
+        page.drawRectangle({
+            x: 0,
+            y: 0,
+            width: page.getWidth(),
+            height: page.getHeight(),
+            color: rgb(0, 0, 0),
+            opacity: 0.5,
+        });
+
+        const fontSize = 12;
+        const fieldSpacing = 25;
+        let yPosition = 500;
+
+        // Function to calculate centered text position
+        const drawCenteredText =async (text:string, { x, y, size, color }:{x:number,y:number,size:number,color:any}) => {
+            const font =await pdfDoc.embedFont('Helvetica')
+            const textWidth = font.widthOfTextAtSize(text, size);
+            const centeredX = (page.getWidth() - textWidth) / 4;
+            page.drawText(text, { x: centeredX+x, y, size, color });
+        };
+
+        const drawField = (label: string, value: string) => {
+            drawCenteredText(label, { x: 50, y: yPosition, size: fontSize, color: rgb(1, 1, 1) });
+            drawCenteredText(value, { x: 200, y: yPosition, size: fontSize, color: rgb(1, 1, 1) });
+            yPosition -= fieldSpacing;
+        };
+
+        drawField('Ground Name:', groundData.groundDetails.groundName)
+        drawField('Ground Location:', groundData.groundDetails.groundLocation)
+        drawField('Price:', groundData.groundDetails.price.toString())
+        drawField('Ground Owner:', groundData.groundDetails.addedBy)
+        drawField('Booked For:', groundData.date)
+        drawField('Booked From', groundData.startTime)
+        drawField('Booked To:', groundData.endTime)
+        drawField('Booked On:', groundData.bookedOn)
+        drawField('Booked By:', loginDetails.username)
+
+        const pdfBytes = await pdfDoc.save();
 
         const fileName = `${MyBookingReverse[index].groundDetails.groundName}.pdf`;
-        const blob = new Blob([pdfBytes],{type:'application/pdf'});
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.download = fileName;
         link.href = window.URL.createObjectURL(blob);
