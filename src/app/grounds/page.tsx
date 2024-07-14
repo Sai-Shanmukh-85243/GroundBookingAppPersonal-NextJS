@@ -6,7 +6,6 @@ import { allGroundsOutputModel } from "@/models/allgroundsOutputModel";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { getAllGrounds, groundsSelector } from "@/redux/slices/groundsSlice";
 import { LoginSelector } from "@/redux/slices/loginSlice";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

@@ -3,11 +3,13 @@ import { STATUS_NAME } from "../types/statusTypes";
 import { RootState } from "../store";
 
 interface bookingStatusInterface  {
-    bookingStatus:boolean | null
+    bookingStatus:boolean | null,
+    myBookingStatus:boolean
 }
 
 const initialState: bookingStatusInterface = {
-    bookingStatus : null
+    bookingStatus : null,
+    myBookingStatus:false
 }
 
 const statusSlice = createSlice({
@@ -15,11 +17,14 @@ const statusSlice = createSlice({
     initialState,
     reducers:{
         setBookingStatus(state,action:PayloadAction<boolean | null>){
-            return {...initialState,bookingStatus:action.payload};
+            return {...state,bookingStatus:action.payload};
+        },
+        setMyBookingStatus(state,action:PayloadAction<boolean>){
+            return {...state,myBookingStatus:action.payload}
         }
     }
 })
 
 export const StatusReducer = statusSlice.reducer;
-export const {setBookingStatus} = statusSlice.actions;
+export const {setBookingStatus,setMyBookingStatus} = statusSlice.actions;
 export const StatusSelector = (state:RootState) => state.status;
