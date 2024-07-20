@@ -10,9 +10,15 @@ import { setMyBookingStatus, StatusSelector } from "@/redux/slices/statusSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { PDFDocument, rgb } from "pdf-lib";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+const html2pdf = require('html2pdf.js');
+const pdfmake = require('pdfmake');
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const MyBookings = () => {
+    const contentRef = useRef(null);
     const loginDetails = useAppSelector(LoginSelector);
     const MyBookings: mybookingOutputModel[] = useAppSelector(MyBookingSelector);
     const MyBookingStatus: boolean = useAppSelector(StatusSelector).myBookingStatus;
@@ -129,6 +135,60 @@ const MyBookings = () => {
         document.body.removeChild(link);
     }
 
+    function handleDownloadHTML2PDF() {
+        const content = contentRef.current
+        let filename = MyBookingReverse[index].groundDetails.groundName+"-"+MyBookingReverse[index].date+"-"+MyBookingReverse[index].startTime+ '.pdf'
+        var options = {
+            filename: filename,
+            margin: 0.8,
+            image: { type: 'jpef', quality: 0.98 },
+            html2canvas: { scale: 4 },
+            jsPDF: {
+                unit: 'in',
+                fomrat: 'letter',
+                orientation: 'portrait',
+            },
+        }
+        var params = {
+            MyBooking: MyBookingReverse[index],
+        }
+
+        html2pdf().set(options).from(content).save();
+
+    }
+
+    function handleDownloadHTML2CanvasAndPDFMake() {
+        //MyBooking
+        let element = document.getElementById("MyBooking")!;
+        html2canvas(element, {
+            // onrendered:function(canvas:any){
+            //     var data = canvas.toDataURL();
+            //     var docDefinition = {
+            //         content: [{
+            //             image: data,
+            //             width: 500,
+            //         }]
+            //     };
+            //     pdfmake.createPdf(docDefinition).download("Score_Details.pdf");
+            // }
+        })
+
+    }
+
+    function handleDownloadJSPDF(){
+        let doc = new jsPDF('l', 'mm', [595, 842]);
+        let pdf = document.getElementById("MyBooking")!;
+        //console.log(pdf);
+        doc.html(pdf,{
+            callback: function(doc) {
+                doc.save(MyBookingReverse[index].groundDetails.groundName+'.pdf');
+            },
+            x: 10,
+            y: 10
+        });
+       // doc.save("save.pdf");
+    }
+
     return (
         <div className="h-full w-full">
             {!loginDetails.status ?
@@ -151,11 +211,11 @@ const MyBookings = () => {
                                         </div>
                                         <div className="basis-1/12 self-end">
                                             <div className="flex gap-3">
-                                                <button className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300" onClick={handleDownload}>Download</button>
+                                                <button className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300" onClick={handleDownloadHTML2PDF}>Download</button>
                                                 <button className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300" onClick={handleRefresh}>Refresh</button>
                                             </div>
                                         </div>
-                                        <div className={"basis-9/12 m-5 sm:mt-0"} >
+                                        <div id="MyBooking" className={"basis-9/12 m-5 sm:mt-0"} ref={contentRef} >
                                             <MyBookingCard MyBooking={MyBookingReverse[index]} />
                                         </div>
                                         <div className="basis-1/12 flex justify-around">

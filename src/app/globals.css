@@ -245,7 +245,7 @@
 }
 
 .MyBookingsCard_form{
-  @apply my-3 grid sm:grid-rows-4 gap-5 sm:grid-flow-col text-white backdrop-blur-sm border-2 rounded-md p-3;
+  @apply my-3 max-sm:mx-2 grid sm:grid-rows-4 gap-5 sm:grid-flow-col text-white backdrop-blur-sm border-2 rounded-md p-3;
   box-shadow: 3px 3px 20px white;
 }
 
