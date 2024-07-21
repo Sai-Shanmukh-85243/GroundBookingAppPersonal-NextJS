@@ -31,16 +31,20 @@ const Nav = () => {
         { id: 5, name: 'My Booking', path: '/mybookings' },
     ]
 
+    const adminOnlyNavLinks = [
+        { id: 6, name: 'My Grounds', path: '/mygrounds' },
+    ]
+
     const isActive = (path: string) => {
         return path === activePath;
     }
 
     function HandleLogout() {
         dispatch(removeLoginData());
-        let popup:popupModel ={
-            show:true,
-            message:'Logged Out Successfully',
-            type:'success'
+        let popup: popupModel = {
+            show: true,
+            message: 'Logged Out Successfully',
+            type: 'success'
         }
         dispatch(setPopup(popup))
         router.replace('/login');
@@ -55,6 +59,17 @@ const Nav = () => {
                             <Link href={ele.path} key={ele.id}><span className={`nav_text whitespace-nowrap  ${isActive(ele.path) ? ' active_path_nav_text' : ''}`}>{ele.name}</span></Link>
                         )
                     })}
+                    {loginData.role.slice(1, -1).toLowerCase() === "admin" ?
+                        <div>
+                            {
+                                adminOnlyNavLinks.map((ele) => {
+                                    return (
+                                        <Link href={ele.path} key={ele.id}><span className={`nav_text whitespace-nowrap  ${isActive(ele.path) ? ' active_path_nav_text' : ''}`}>{ele.name}</span></Link>
+                                    )
+                                })
+                            }
+                        </div> :
+                        null}
                 </div>
                 {
                     isLoggedIn.status
@@ -94,7 +109,7 @@ const Nav = () => {
                                 <div className="flex flex-col gap-4">
                                     <button onClick={() => { setShowMenuItems(false); HandleLogout() }} className="nav_text">Logout</button>
                                     <span onClick={() => { setShowMenuItems(false) }} className="nav_text zoom_text">{isLoggedIn.username ? isLoggedIn.username : 'NA'}</span>
-                                    <span onClick={() => { setShowMenuItems(false) }} className="nav_text zoom_text">{isLoggedIn.role ? isLoggedIn.role.slice(1,-1) : 'NA'}</span>
+                                    <span onClick={() => { setShowMenuItems(false) }} className="nav_text zoom_text">{isLoggedIn.role ? isLoggedIn.role.slice(1, -1) : 'NA'}</span>
                                 </div>
                                 :
                                 <div className="flex flex-col gap-4">

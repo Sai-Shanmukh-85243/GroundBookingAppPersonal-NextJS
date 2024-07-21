@@ -5,6 +5,7 @@ import { watchForAddSignUp } from "./sagas/signupSaga";
 import { watchGetAllGrounds } from "./sagas/groundsSaga";
 import { watchAddBooking } from "./sagas/bookgroundSaga";
 import { watchGetMyBookings } from "./sagas/myBookingsSaga";
+import { watchGetMyGrounds } from "./sagas/mygroundsSaga";
 
 export function* RootSaga(){
     yield all(
@@ -14,6 +15,7 @@ export function* RootSaga(){
           fork(watchGetAllGrounds),
           fork(watchAddBooking),
           fork(watchGetMyBookings),
+          fork(watchGetMyGrounds),
         ]
     )
 }
