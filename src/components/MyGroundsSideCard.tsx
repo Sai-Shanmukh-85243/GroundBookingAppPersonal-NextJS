@@ -10,20 +10,11 @@ interface MySideCardProps {
 
 
 const MyGroundsSideCard = ({ sideCard, changeCurrentIndex, indexOfGround, mygrounds }: MySideCardProps) => {
-    // useEffect(()=>{
-    //     console.log("sideCard.groundName:",sideCard.groundName)
-    //     console.log("sideCard.image:",sideCard.image)
-    // })
-    function callChangeCurrentIndex() {XMLDocument
-        //console.log("myground:", mygrounds)
-
+    
+    function callChangeCurrentIndex() {
         var index = mygrounds.findIndex((ground) => {
-            //console.log("ground.groundName:", ground.groundName)
-            //console.log("sideCard.groundName:", sideCard.groundName)
             return ground.groundName === sideCard.groundName;
         })
-        // console.log("index:", index)
-        // console.log(mygrounds[index]);
         changeCurrentIndex(index);
     }
     return (

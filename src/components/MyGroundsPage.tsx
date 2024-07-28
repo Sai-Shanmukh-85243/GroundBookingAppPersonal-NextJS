@@ -5,23 +5,15 @@ import MyGroundsSideCard from "./MyGroundsSideCard";
 
 const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const sideCardsFirst = currentIndex + 1;
-    const sideCardsLast = currentIndex + 4;
-    const sideCards = getSideCards(mygrounds, sideCardsFirst, sideCardsLast);
-    function getSideCards(mygrounds: mygroundsOutputModel[], sideCardsFirst: number, sideCardsLast: number) {
-        let sidegrounds = [];
-        if (sideCardsLast >= mygrounds.length) {
-            for (let i = mygrounds.length-4; i < mygrounds.length; i++) {
-                sidegrounds.push(mygrounds[i]);
-            }
+    const [sideCardStartIndex,setSideCardStartIndex] = useState(0);
+    let sideCardEndIndex = sideCardStartIndex+3;
+    const sideCards = getSideCards();
+    function getSideCards(){
+        let tempSideCards = []
+        for(let i = sideCardStartIndex; i <= sideCardEndIndex ; i++ ){
+            tempSideCards.push(mygrounds[i]);
         }
-        else {
-            for (let i = sideCardsFirst; i <= (sideCardsLast); i++) {
-                sidegrounds.push(mygrounds[i]);
-            }
-        }
-        //console.log("side grounds:",sidegrounds)
-        return sidegrounds;
+        return  tempSideCards;
     }
 
     function changeCurrentIndex(newCurrentIndex: number) {
@@ -44,14 +36,14 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
                             <span>{mygrounds[currentIndex].price}</span>
                             <span>{mygrounds[currentIndex].description}</span>
                         </div>
-                        <div className="myGroundsSideCards flex justify-between gap-2 pr-3 overflow-hidden">
+                        <div className="myGroundsSideCards flex justify-between gap-3 pr-3 overflow-hidden p-3">
                             {sideCards.map((sideground, index) => {
                                 return <MyGroundsSideCard sideCard={sideground} changeCurrentIndex={changeCurrentIndex.bind(this)} indexOfGround={currentIndex+index+1} mygrounds={mygrounds} key={index} />
                             })}
                         </div>
                         <div className="sideCardsButtons flex justify-around items-center">
-                            <span>Next</span>
-                            <span>Previous</span>
+                            <button className="nextPrevButton" onClick={()=>setSideCardStartIndex((prev)=>prev-1)} disabled={sideCardStartIndex <= 0 ? true : false}><span className="nextPrevButtonText">&larr;</span></button>
+                            <button className="nextPrevButton" onClick={()=>setSideCardStartIndex((prev)=>prev+1)} disabled={sideCardEndIndex >= (mygrounds.length-1) ? true : false}><span className="nextPrevButtonText">&rarr;</span></button>
                         </div>
                         <div className="myGroundsButtons flex justify-around items-center">
                             <span>Delete Ground</span>
