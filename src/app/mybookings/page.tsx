@@ -216,12 +216,12 @@ const MyBookings = () => {
                                             </div>
                                         </div>
                                         <div id="MyBooking" className={"basis-9/12 m-5 sm:mt-0"} ref={contentRef} >
-                                            <MyBookingCard MyBooking={MyBookingReverse[index]} />
+                                            <MyBookingCard MyBooking={MyBookingReverse[index]} key={index} />
                                         </div>
                                         <div className="basis-1/12 flex justify-around">
                                             <div className="flex gap-3">
                                                 <div>
-                                                    <button onClick={handleFirst} className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300">First</button>
+                                                    <button onClick={handleFirst} disabled={index === 0 ? true : false} className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300 disabled:hover:cursor-not-allowed disabled:hover:bg-red-500">First</button>
                                                 </div>
                                                 <div>
                                                     <button onClick={handlePrevious} disabled={index === 0 ? true : false} className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300 disabled:hover:cursor-not-allowed disabled:hover:bg-red-500">Previous</button>
@@ -239,7 +239,7 @@ const MyBookings = () => {
                                                     <button onClick={handleNext} disabled={index === (MyBookingReverse.length - 1) ? true : false} className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300 disabled:hover:cursor-not-allowed disabled:hover:bg-red-500">Next</button>
                                                 </div>
                                                 <div>
-                                                    <button onClick={handleLast} className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300">Last</button>
+                                                    <button onClick={handleLast} disabled={index === (MyBookingReverse.length - 1) ? true : false} className="bg-blue-500 p-1 rounded-md text-[0.8rem] hover:bg-blue-300 disabled:hover:cursor-not-allowed disabled:hover:bg-red-500">Last</button>
                                                 </div>
                                             </div>
                                         </div>

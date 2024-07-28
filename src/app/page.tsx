@@ -17,13 +17,14 @@ export default function Home() {
           <span className="points font-serif">So, gather your team, lace up your sneakers, and come create unforgettable memories on our field. Book now and let the games begin!</span>
         </div>
         <div className="hidden xl:flex justify-center w-full h-full">
-          <div className="card">
+          {/* <div className="card"> */}
+          <div className="CardWithoutFlip">
             <div className="homeCardFront">
-              <Image className="homeCardFrontImage" src='/images/football3.png' alt='football' fill/>
+              <Image className="homeCardFrontImage jumpingBall" src='/images/football3.png' alt='football' fill/>
             </div>
-            <div className="homeCardBack">
+            {/* <div className="homeCardBack">
             <Image className="homeCardBackImage" src='/images/football3.png' alt='football' fill/>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

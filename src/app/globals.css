@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url('utility.css');
+@import url('CSS/utility.css');
+@import url('CSS/myGrounds.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -150,6 +151,18 @@
 .card {
   @apply h-full w-1/2 relative transition-all duration-[0.8s] ease-in;
   transform-style: preserve-3d;
+}
+
+.CardWithoutFlip {
+  @apply h-full w-1/2 relative;
+  /* transform-style: preserve-3d; */
+}
+
+@media(prefers-reduced-motion:no-preference){
+.CardWithoutFlip:hover{
+  animation: spining ease 2s;
+  animation-iteration-count: infinite;
+}
 }
 
 .card:hover {

@@ -1,4 +1,5 @@
 'use client';
+import MyGroundsPage from "@/components/MyGroundsPage";
 import { mygroundsOutputModel } from "@/models/mygroundsOutputModel";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { LoginSelector } from "@/redux/slices/loginSlice";
@@ -21,10 +22,8 @@ const MyGrounds = () =>{
         }
     },[])
     return(
-        <div>
-            {mygrounds.map((ground,index)=>{
-                return <span key = {index}>{ground.groundName}</span>
-            })}
+        <div className="w-full h-full">
+            {mygrounds.length>0 && <MyGroundsPage mygrounds={mygrounds} />}
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 const MyBookingCard = ({ MyBooking}: { MyBooking: mybookingOutputModel}) => {
     return (
-        <div id="container" className="MyBookingsCard_Container" style={{ backgroundImage: `url(${MyBooking.groundDetails.image ? `data:image/png;base64,${MyBooking.groundDetails.image}` : '/images/ImageNotAvailable.webp'})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', zIndex: -1 }}>
+        <div id="container" className="MyBookingsCard_Container myBookingAnimation" style={{ backgroundImage: `url(${MyBooking.groundDetails.image ? `data:image/png;base64,${MyBooking.groundDetails.image}` : '/images/ImageNotAvailable.webp'})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', zIndex: -1 }}>
             <div className="flex h-full justify-center items-center bg-black/50">
                 <form className="MyBookingsCard_form">
 
