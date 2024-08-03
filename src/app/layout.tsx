@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { Providers } from "./reduxProviders";
 import Popup from "@/components/popup";
+import DialogBox from "@/components/DialogBox";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
               <Popup/>
             </div>
             <div className="flex basis-11/12">
+              <DialogBox/>
               {children}
             </div>
           </div>

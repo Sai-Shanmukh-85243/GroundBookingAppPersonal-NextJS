@@ -40,7 +40,7 @@
 }
 
 .nextPrevButton{
-    @apply border-2 p-1 pt-0 rounded-full border-orange-600 text-orange-600
+    @apply border-2 bg-black bg-opacity-75 p-1 pt-0 rounded-full border-orange-600 text-orange-600
 }
 
 .nextPrevButton:hover{
@@ -57,4 +57,20 @@
 
 .nextPrevButtonText{
     @apply text-xl font-bold align-middle
+}
+
+.mainButtons{
+    @apply border-2 border-white w-full bg-black bg-opacity-50
+}
+
+.deletebutton{
+    @apply hover:bg-red-600 hover:text-white 
+}
+
+.editbutton{
+    @apply hover:bg-blue-600 hover:text-white
+}
+
+.addbutton{
+    @apply border-white border-2 p-1 rounded-md bg-black bg-opacity-50 hover:bg-green-600 hover:text-white  
 }
