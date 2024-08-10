@@ -19,8 +19,8 @@ const DialogBox = () => {
                             <span className="text-md text-center text-pretty">{dialogBox.message}</span>
                         </div>
                         <div className="w-full flex justify-around">
-                            {dialogBox.buttons.map((button) => {
-                                return <button className="dialogBoxButton" onClick={() => { button.onClick(), setDialogBox({show:false,message:'',buttons:[],height:'50%',width:'50%'}) }}>{button.label}</button>
+                            {dialogBox.buttons.map((button,index) => {
+                                return <button className="dialogBoxButton" key={index} onClick={() => { button.onClick(), setDialogBox({show:false,message:'',buttons:[],height:'50%',width:'50%'}) }}>{button.label}</button>
                             })}
                         </div>
                     </div>

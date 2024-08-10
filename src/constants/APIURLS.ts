@@ -5,3 +5,4 @@ export const allgroundsURL = rootURL + "/ground/allgrounds";
 export const addbookingURL = rootURL + "/booking/addbooking";
 export const getmybookingsURL = rootURL + "/booking/mybookings";
 export const getmygroundsURL = rootURL + "/ground/getgroundbyaddedby/";
+export const deletemygroundsURL = rootURL + "/ground/deleteground";

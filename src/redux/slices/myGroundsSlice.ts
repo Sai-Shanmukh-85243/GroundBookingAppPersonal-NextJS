@@ -20,4 +20,4 @@ const MyGroundsSlice = createSlice({
 
 export const MyGroundsReducer = MyGroundsSlice.reducer;
 export const {getMyGrounds,setMyGrounds} = MyGroundsSlice.actions;
-export const MYGroundsSelector = (state:RootState)=>state.mygrounds;
+export const MyGroundsSelector = (state:RootState)=>state.mygrounds;

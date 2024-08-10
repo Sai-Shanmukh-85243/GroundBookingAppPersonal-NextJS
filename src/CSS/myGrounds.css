@@ -3,6 +3,16 @@
     grid-template-columns: repeat(6,1fr);
     grid-template-areas: 
     'name name name name name name'
+    'subcontainer subcontainer subcontainer subcontainer subcontainer subcontainer'
+    'subcontainer subcontainer subcontainer subcontainer subcontainer subcontainer'
+    'subcontainer subcontainer subcontainer subcontainer subcontainer subcontainer'
+    'subcontainer subcontainer subcontainer subcontainer subcontainer subcontainer';
+}
+
+.myGroundSubContainer{
+    grid-area: subcontainer;
+    display: grid;
+    grid-template-areas: 
     'details details sidecards sidecards sidecards sidecards'
     'details details sidecards sidecards sidecards sidecards'
     'details details sidecardsbuttons sidecardsbuttons sidecardsbuttons sidecardsbuttons'
@@ -19,7 +29,7 @@
 
 .myGroundsSideCards {
     grid-area: sidecards;
-    @apply backdrop-blur-lg
+    @apply backdrop-blur-lg;
 }
 
 .sideCardsButtons{
@@ -30,8 +40,16 @@
     grid-area: buttons;
 }
 
+.myGroundsSideCardsText{
+    @apply w-full text-center text-pretty;
+}
+
+.sideCardMainContainer{
+   
+}
+
 .sideCardContainer{
-    @apply border-2 border-white rounded-md border-opacity-70 ;
+    @apply border-2 border-white rounded-md border-opacity-70;
     box-shadow: white 3px 3px 10px;
 }
 
@@ -73,4 +91,21 @@
 
 .addbutton{
     @apply border-white border-2 p-1 rounded-md bg-black bg-opacity-50 hover:bg-green-600 hover:text-white  
+}
+
+.refreshbutton{
+    @apply border-white border-2 p-1 rounded-md bg-black bg-opacity-50 hover:bg-orange-600 hover:text-white  
+}
+
+.firstLetterCapital::first-letter{
+    text-transform: capitalize;
+}
+
+.myGroundTitle{
+    @apply text-lg;
+    text-shadow: 2px 2px 10px black,-2px -2px 5px orange;
+}
+
+.myGroundInfo{
+    @apply text-cyan-200
 }

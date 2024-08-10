@@ -18,15 +18,15 @@ const MyGroundsSideCard = ({ sideCard, changeCurrentIndex, indexOfGround, mygrou
         changeCurrentIndex(index);
     }
     return (
-        <div className="w-full h-full">
+        <div className="w-full h-full sideCardMainContainer">
             {sideCard &&
                 <div className="h-full w-full sideCardContainer" style={{ backgroundImage: `url(${sideCard.image ? `data:image/png;base64,${sideCard.image}` : `/images/ImageNotAvailable.webp`})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
 
                     <div className="sideCardDesign w-full h-full" onClick={() => callChangeCurrentIndex()}>
-                        <span>{sideCard.groundName}</span>
-                        <span>{sideCard.groundLocation}</span>
-                        <span>{sideCard.price}</span>
-                        <span className="w-full text-center text-pretty">{sideCard.description}</span>
+                        <span className="myGroundsSideCardsText">{sideCard.groundName}</span>
+                        <span className="myGroundsSideCardsText">{sideCard.groundLocation}</span>
+                        <span className="myGroundsSideCardsText">{sideCard.price}</span>
+                        <span className="myGroundsSideCardsText">{sideCard.description}</span>
                     </div>
                 </div> 
             }
