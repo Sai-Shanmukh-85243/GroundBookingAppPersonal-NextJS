@@ -1,14 +1,16 @@
 'use client'
 import { mygroundsOutputModel } from "@/models/mygroundsOutputModel";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MyGroundsSideCard from "./MyGroundsSideCard";
 import { useAppDispatch } from "@/redux/hook";
 import { setDialogContect, showDialogBox } from "@/redux/slices/dialogBoxSlice";
 import { dialogboxButtonsArray, dialogPayload } from "@/models/dialogboxInputModel";
+import { DialogBoxContext } from "@/Contexts/DialogBoxContext";
 
 const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [sideCardStartIndex, setSideCardStartIndex] = useState(0);
+    const {setDialogBox} = useContext(DialogBoxContext);
     let sideCardEndIndex = sideCardStartIndex + 3;
     const dispatch = useAppDispatch();
     const sideCards = getSideCards();
@@ -31,25 +33,27 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
         //alert('Deleting ground canceled')
     }
     function handleDeleteButton(){
-        let buttons:dialogboxButtonsArray = [
+        let buttons:dialogBoxButtonsState[] = [
             {
-                name:'Yes',
+                label:'Yes',
                 onClick:handleDelete,
 
             },
             {
-                name:'No',
+                label:'No',
                 onClick:handleNoDelete,
             }
         ]
-        let dialogcontent:dialogPayload = {
+        let dialogcontent:DialogBoxState = {
+            show:true,
             message:'Are you sure you want to delete this ground?',
             buttons,
-            height:'80%',
-            width:'80%',
+            // height:'80%',
+            // width:'80%',
         }
-        dispatch(setDialogContect(dialogcontent));
-        dispatch(showDialogBox());
+
+
+        setDialogBox(dialogcontent);
     }
     return (
         <div className="w-full h-full">

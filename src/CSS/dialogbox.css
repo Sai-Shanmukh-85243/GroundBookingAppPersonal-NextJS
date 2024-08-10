@@ -1,11 +1,11 @@
 .DialogBoxContainer{
-    @apply h-full w-full z-50 fixed flex justify-center items-center backdrop-blur-sm
+    @apply h-full w-full z-50 fixed flex justify-center items-center backdrop-blur-[2px]
 }
 
 .DialogBox{
-    @apply m-10 bg-white flex flex-col justify-around p-2
+    @apply m-2 bg-white flex flex-col justify-around p-2 rounded-md bg-opacity-90
 }
 
 .dialogBoxButton{
-    @apply border-2 border-black p-2 hover:border-blue-600 hover:text-white hover:bg-blue-600
+    @apply border-2 border-black p-2 rounded-lg hover:border-blue-600 hover:text-white hover:bg-blue-600
 }

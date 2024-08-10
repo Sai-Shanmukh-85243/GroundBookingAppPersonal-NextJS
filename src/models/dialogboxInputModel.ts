@@ -1,7 +1,7 @@
 export type dialogboxState = {
-    show: boolean,
-    message: string,
-    buttons: dialogboxButtonsArray,
+    show?: boolean,
+    message?: string,
+    buttons?: dialogboxButtonsArray,
     height?: string,
     width?: string
 }

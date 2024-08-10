@@ -7,23 +7,23 @@ import { getMyGrounds, MYGroundsSelector } from "@/redux/slices/myGroundsSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const MyGrounds = () =>{
+const MyGrounds = () => {
     const router = useRouter();
     const loginData = useAppSelector(LoginSelector);
-    const mygrounds:mygroundsOutputModel[] = useAppSelector(MYGroundsSelector);
+    const mygrounds: mygroundsOutputModel[] = useAppSelector(MYGroundsSelector);
     const dispatch = useAppDispatch();
 
-    useEffect(()=>{
-        if(loginData.role.slice(1,-1).toLowerCase() !== "admin"){
+    useEffect(() => {
+        if (loginData.role.slice(1, -1).toLowerCase() !== "admin") {
             router.replace('/unauthorized');
         }
-        else{
+        else {
             dispatch(getMyGrounds());
         }
-    },[])
-    return(
+    }, [])
+    return (
         <div className="w-full h-full">
-            {mygrounds.length>0 && <MyGroundsPage mygrounds={mygrounds} />}
+            {mygrounds.length > 0 && <MyGroundsPage mygrounds={mygrounds} />}
         </div>
     )
 }

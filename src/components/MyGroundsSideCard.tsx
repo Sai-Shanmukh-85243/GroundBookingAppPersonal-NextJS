@@ -26,7 +26,7 @@ const MyGroundsSideCard = ({ sideCard, changeCurrentIndex, indexOfGround, mygrou
                         <span>{sideCard.groundName}</span>
                         <span>{sideCard.groundLocation}</span>
                         <span>{sideCard.price}</span>
-                        <span>{sideCard.description}</span>
+                        <span className="w-full text-center text-pretty">{sideCard.description}</span>
                     </div>
                 </div> 
             }
