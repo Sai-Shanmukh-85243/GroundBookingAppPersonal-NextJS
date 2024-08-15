@@ -8,16 +8,18 @@ import { dialogboxButtonsArray, dialogPayload } from "@/models/dialogboxInputMod
 import { DialogBoxContext } from "@/Contexts/DialogBoxContext";
 import { deleteGround, DeleteGroundSelector, setDeleteGroundStatus } from "@/redux/slices/deleteGroundSlice";
 import { getMyGrounds } from "@/redux/slices/myGroundsSlice";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [sideCardStartIndex, setSideCardStartIndex] = useState(0);
     const { setDialogBox } = useContext(DialogBoxContext);
+    const router = useRouter();
     let sideCardEndIndex = mygrounds.length > 4 ? sideCardStartIndex + 3 : mygrounds.length - 1;
     const dispatch = useAppDispatch();
     const wasGroundDeleted = useAppSelector(DeleteGroundSelector).status;
     if (wasGroundDeleted === false) {
-        console.log("current index:",currentIndex);
         setCurrentIndex(currentIndex+1);
         dispatch(setDeleteGroundStatus(null))
     }
@@ -67,6 +69,7 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
     function handleRefresh() {
         dispatch(getMyGrounds());
     }
+    
     return (
         <div className="w-full h-full">
             {
@@ -80,7 +83,7 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
                                         <span className="firstLetterCapital myGroundTitle">{mygrounds[currentIndex].groundName}</span>
                                     </div>
                                     <div className="w-full flex gap-3 justify-end mr-10">
-                                        <button className="addbutton"> Add Ground</button>
+                                        <Link className="addbutton" href={'addground'}> Add Ground</Link>
                                         <button className="refreshbutton" onClick={handleRefresh}> Refresh </button>
                                     </div>
                                 </div>

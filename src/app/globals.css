@@ -2,6 +2,7 @@
 @import url('../CSS/utility.css');
 @import url('../CSS/myGrounds.css');
 @import url('../CSS/dialogbox.css');
+@import url('../CSS/addground.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -161,6 +162,7 @@
 
 @media(prefers-reduced-motion:no-preference){
 .CardWithoutFlip:hover{
+  /* animation-delay: 3s; this is not working */
   animation: spining ease 2s;
   animation-iteration-count: infinite;
 }
