@@ -9,61 +9,7 @@ const AddGround = () => {
     const [groundPrice, setGroundPrice] = useState<number | undefined>();
     const [groundDescription, setGroundDescription] = useState<string>("");
     const [groundImage, setGroundImage] = useState<File | undefined>();
-    const labels = [
-        {
-            label: 'Ground Name:',
-            className: 'addGroundLabel',
-        },
-        {
-            label: 'Ground Location:',
-            className: 'addGroundLabel',
-        },
-        {
-            label: 'Ground Price (per hour):',
-            className: 'addGroundLabel',
-        },
-        {
-            label: 'Ground Description:',
-            className: 'addGroundLabel',
-        },
-        {
-            label: 'Ground Image:',
-            className: 'addGroundLabel',
-        },
-    ];
 
-    const inputs = [
-        {
-            className: 'addGroundInput',
-            onChange: setGroundName,
-            value: groundName,
-            type: 'text',
-        },
-        {
-            className: 'addGroundInput',
-            onChange: setGroundLocation,
-            value: groundLocation,
-            type: 'text',
-        },
-        {
-            className: 'addGroundInput',
-            onChange: setGroundPrice,
-            value: groundPrice,
-            type: 'number',
-        },
-        {
-            className: 'addGroundInput',
-            onChange: setGroundDescription,
-            value: groundDescription,
-            type: 'text',
-        },
-        {
-            className: 'addGroundInput',
-            onChange: setGroundImage,
-            value: undefined,
-            type: 'file',
-        },
-    ]
     return (
         <div className="h-full w-full addgroundContainer">
             <div className="addGroundHeader">
@@ -71,29 +17,24 @@ const AddGround = () => {
                     Add Ground
                 </span>
             </div>
-            {/* <div className="addGroundFormContents"> */}
-            {labels.map((item, index) => {
-                return <label key={index} className={item.className}>{item.label}</label>
-            })}
+            <form className="addGroundFormContents">
+                <div className="labels">
+                    <label htmlFor="groundname">Ground Name:</label>
+                    <label htmlFor="groundlocation">Ground Location:</label>
+                    <label htmlFor="groundprice">Ground Price:</label>
+                    <label htmlFor="grounddescription">Ground Description:</label>
+                    <label htmlFor="groundimage">Ground Image:</label>
+                </div>
 
-            {inputs.map((item, index) => {
-                return <input key={index} className={item.className} type={item.type} value={item.value}
-                // onChange={(e) => {
-                //     if (item.type === 'file') {
-                //         // Handle File input separately
-                //         item.onChange(e.target.files?.[0] ?? undefined);
-                //     } else if (item.type === 'number') {
-                //         // Handle number input separately
-                //         item.onChange(Number(e.target.value) || undefined); // Ensure number or undefined
-                //     } else {
-                //         // Handle text inputs (string)
-                //         item.onChange(e.target.value);
-                //     }
-                // }}
-                ></input>
-            })}
+                <div className="inputs">
+                    <input id="groundname" type='text' value={groundName} onChange={(e) => { setGroundName(e.target.value) }} />
+                    <input id="groundlocation" type='text' value={groundLocation} onChange={(e) => { setGroundLocation(e.target.value) }} />
+                    <input id="groundprice" type='number' value={groundPrice} onChange={(e) => { setGroundPrice(Number(e.target.value)) }} />
+                    <input id="grounddescription" type='text' value={groundDescription} onChange={(e) => { setGroundDescription(e.target.value) }} />
+                    <input id="groundimage" type='file' onChange={(e) => { setGroundImage(e.target.files?.[0]) }} />
+                </div>
 
-            {/* </div> */}
+            </form>
             <div className="addGroundFooter">
                 <button className="goback" onClick={() => { router.back() }}>Go Back</button>
             </div>

@@ -1,74 +1,57 @@
-@media only screen and (min-width: 1024px) {
-    .addgroundContainer {
-        display: grid;
-        justify-items: center;
-        align-items: center;
-        grid-area: mainContainer;
-        grid-template-areas: 
-        'Header Header'
-        'label input'
-        'label input'
-        'label input'
-        'label input'
-        'label input'
-        'Footer Footer';
-    }
-}
+   .addgroundContainer {
+       display: grid;
+       justify-items: center;
+       align-items: center;
+       grid-area: mainContainer;
+       grid-template-areas:
+           'Header Header'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'Footer Footer';
+   }
 
-@media only screen and (max-width: 1024px) {
-    .addgroundContainer {
-        display: grid;
-        justify-items: center;
-        align-items: center;
-        grid-area: mainContainer;
-        grid-template-areas: 
-        'Header Header Header Header'
-        'FormContents FormContents FormContents FormContents'
-        'FormContents FormContents FormContents FormContents'
-        'FormContents FormContents FormContents FormContents'
-        'FormContents FormContents FormContents FormContents'
-        'FormContents FormContents FormContents FormContents'
-        'FormContents FormContents FormContents FormContents'
-        'FormContents FormContents FormContents FormContents'
-        'Footer Footer Footer Footer';
-    }
-}
+   .addGroundHeader {
+       grid-area: Header;
+   }
 
-/* @media screen and (min-width: 1024px) {
-    .addGroundFormContents{
-        display: grid;
-        grid-template-areas: 
-        'label input'
-        'label input'
-        'label input'
-        'label input'
-        'label input'
-        'label input';
-    }
-} */
+   .addGroundFormContents {
+       grid-area: FormContents;
+   }
 
-.addGroundHeader {
-    grid-area: Header;
-}
+   .addGroundFooter {
+       grid-area: Footer;
+   }
 
-.addGroundFormContents {
-    @apply w-full h-full;
-    grid-area: FormContents;
-}
+   .addGroundFormContents input {
+       @apply border-2 border-black rounded-md p-2;
+   }
 
-.addGroundFooter {
-    grid-area: Footer;
-}
+   .addGroundFormContents input[type='file'] {
+       @apply border-none
+   }
 
-.addGroundLabel{
-    display: grid;
-    grid-area: label;
-    grid-template-rows: repeat(auto-fill, minmax(100px, 1fr)); 
-}
+   .addGroundFormContents {
+       display: flex;
+       max-width: 600px;
+       margin: auto;
+   }
 
-.addGroundInput{
-    @apply border-2 border-black;
-    display: grid;
-    grid-area: input;
-    grid-template-rows: repeat(auto-fill, minmax(100px, 1fr)); 
-}
+   .labels,
+   .inputs {
+       @apply flex flex-col gap-2
+   }
+
+   .labels label {
+       text-align: right;
+       padding: 10px;
+       vertical-align: middle;
+       margin: 2px;
+       white-space: nowrap;
+   }
+
+   .inputs input {
+       padding: 10px;
+   }
