@@ -50,7 +50,7 @@ const Grounds = () => {
     return (
         <div className="h-full w-full">
             {!loginData.status ?
-                <PromptLogin/>
+                <PromptLogin messagePrefix="See Grounds"/>
                  :
                 allGrounds.length === 0 ?
                     <Loading />

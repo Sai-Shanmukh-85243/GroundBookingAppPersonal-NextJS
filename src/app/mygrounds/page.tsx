@@ -15,17 +15,18 @@ const MyGrounds = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (loginData.role.slice(1, -1).toLowerCase() !== "admin") {
+        if (loginData.status && loginData.role.slice(1, -1).toLowerCase() !== "admin") {
             router.replace('/unauthorized');
         }
         else {
-            dispatch(getMyGrounds());
+            if(loginData.status)
+                dispatch(getMyGrounds());
         }
     }, [])
     return (
         <div className="w-full h-full">
             {!loginData.status ?
-                <PromptLogin /> :
+                <PromptLogin messagePrefix="See Grounds"/> :
                 <div className="w-full h-full">
                     {mygrounds.length > 0 && <MyGroundsPage mygrounds={mygrounds} />}
                 </div>}
