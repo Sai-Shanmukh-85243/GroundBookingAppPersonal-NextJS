@@ -1,0 +1,17 @@
+.bookGroundForm{
+    box-shadow : 10px 10px 10px black;
+    @apply rounded-lg;
+}
+
+.bookGroundForm div label span{
+    @apply text-transparent bg-gradient-to-b from-gray-800 via-green-600 to-slate-600 bg-clip-text font-bold
+}
+
+.bookGroundForm div label input,select{
+    box-shadow: 1px 1px 5px black;
+    @apply rounded-md;
+}
+
+.makeCursorPointer{
+    @apply cursor-pointer;
+}

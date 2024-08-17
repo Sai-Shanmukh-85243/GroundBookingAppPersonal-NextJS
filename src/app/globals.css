@@ -3,6 +3,7 @@
 @import url('../CSS/myGrounds.css');
 @import url('../CSS/dialogbox.css');
 @import url('../CSS/addground.css');
+@import url('../CSS/bookground.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -236,7 +237,7 @@
 }
 
 .BookGround_button{
-  @apply relative text-black p-2 border-2 border-black rounded-md overflow-hidden
+  @apply relative bg-none text-black p-2 border-2 border-black rounded-md overflow-hidden
 }
 
 .BookGround_button::before{

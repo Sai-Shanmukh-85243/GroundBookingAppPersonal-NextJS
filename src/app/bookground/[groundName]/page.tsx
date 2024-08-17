@@ -149,8 +149,8 @@ const BookGround = ({ params }: { params: any }) => {
     return (
         <div className="h-full w-full">
             <form className="h-full w-full flex justify-center items-center flex-wrap" onSubmit={handleSubmit}>
-                <div className="p-5 flex flex-col gap-8 border-2 border-black">
-                    <div className="grid gap-5 items-center max-sm:my-5 sm:grid-rows-5 sm:grid-flow-col ">
+                <div className="p-5 flex flex-col gap-8 border-2 border-black bookGroundForm">
+                    <div className="grid gap-5 items-center max-sm:my-5 sm:grid-rows-5 sm:grid-flow-col">
                         <label className="flex flex-col gap-1">
                             <span className="self-center">Ground Name:&nbsp;</span>
                             <input className="px-3 py-1" value={selectedGround?.groundName} disabled></input>
@@ -177,11 +177,11 @@ const BookGround = ({ params }: { params: any }) => {
                         </label>
                         <label className="flex flex-col gap-1">
                             <span className="self-center">Book For:&nbsp;</span>
-                            <input className="px-3 py-1" required type="date" min={getTodaysDate()} value={bookedFor} onChange={BookedFor}></input>
+                            <input className="px-3 py-1 makeCursorPointer" required type="date" min={getTodaysDate()} value={bookedFor} onChange={BookedFor}></input>
                         </label>
                         <label className="flex flex-col gap-1">
                             <span className="self-center">Book From:&nbsp;</span>
-                            <select required onChange={BookedFrom} onFocus={onFocusOfBookFrom} value={bookedFrom}>
+                            <select className="makeCursorPointer" required onChange={BookedFrom} onFocus={onFocusOfBookFrom} value={bookedFrom}>
                                 {bookedForValues.map((value,index) => {
                                     return <option key={index} hidden={(value === "" || hideInValidTimeForTodayDate(value) || bookedFor === "")?true:false} value={value} label={value} />
                                 })}
@@ -190,7 +190,7 @@ const BookGround = ({ params }: { params: any }) => {
                         <label className="flex flex-col gap-1">
 
                             <span className="self-center">Book To:&nbsp;</span>
-                            <select required onFocus={onFocusOfBookTo} onChange={BookedTo} value={bookedTo}>
+                            <select className="makeCursorPointer" required onFocus={onFocusOfBookTo} onChange={BookedTo} value={bookedTo}>
                                 {bookedToValues.map((value,index) => {
                                     return <option key={index} hidden={(value === "" || value <= bookedFrom || bookedFrom === "")?true:false} value={value} label={value} />
                                 })}
