@@ -14,7 +14,7 @@ const DialogBox = () => {
         <div>
             {dialogBox.show ?
                 <div className="DialogBoxContainer">
-                    <div className={`DialogBox`} style={{height,width}}> {/* ${dialogBox.height} ${dialogBox.width} */}
+                    <div className={`DialogBox border-2 border-black`} style={{height,width}}> {/* ${dialogBox.height} ${dialogBox.width} */}
                         <div className="flex items-center justify-center">
                             <span className="text-md text-center text-pretty">{dialogBox.message}</span>
                         </div>

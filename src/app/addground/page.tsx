@@ -18,7 +18,6 @@ const AddGround = () => {
     const [groundPrice, setGroundPrice] = useState<string>();
     const [groundDescription, setGroundDescription] = useState<string>("");
     const [groundImage, setGroundImage] = useState<File | undefined>();
-    const [groundImageBlob, setGroundImageBlob] = useState<Blob>();
 
     useEffect(() => {
         if (loginData.status && loginData.role.slice(1, -1).toLowerCase() !== 'admin') {

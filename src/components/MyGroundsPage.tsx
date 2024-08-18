@@ -109,7 +109,7 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
                                         </div>
                                         <div className="myGroundsButtons flex justify-around items-center gap-3 p-3">
                                             <button className="mainButtons deletebutton" onClick={handleDeleteButton}>Delete Ground</button>
-                                            <button className="mainButtons editbutton">Edit Ground</button>
+                                            <Link href={'/editground/'+mygrounds[currentIndex].groundName} className="mainButtons editbutton flex items-center justify-center"><span>Edit Ground</span></Link>
                                         </div>
                                     </div>
                                 }
