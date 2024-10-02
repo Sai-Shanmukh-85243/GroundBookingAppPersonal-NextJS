@@ -20,7 +20,7 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
     const dispatch = useAppDispatch();
     const wasGroundDeleted = useAppSelector(DeleteGroundSelector).status;
     if (wasGroundDeleted === false) {
-        setCurrentIndex(currentIndex+1);
+        setCurrentIndex(currentIndex + 1);
         dispatch(setDeleteGroundStatus(null))
     }
     const sideCards = getSideCards(); //calling this function set the side cards
@@ -37,7 +37,7 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
     }
     function handleDelete(): void {
         //alert('Deleting ground')
-        setCurrentIndex(currentIndex-1);
+        setCurrentIndex(currentIndex - 1);
         dispatch(deleteGround(mygrounds[currentIndex].groundName));
     }
 
@@ -69,7 +69,7 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
     function handleRefresh() {
         dispatch(getMyGrounds());
     }
-    
+
     return (
         <div className="w-full h-full">
             {
@@ -109,15 +109,59 @@ const MyGroundsPage = ({ mygrounds }: { mygrounds: mygroundsOutputModel[] }) => 
                                         </div>
                                         <div className="myGroundsButtons flex justify-around items-center gap-3 p-3">
                                             <button className="mainButtons deletebutton" onClick={handleDeleteButton}>Delete Ground</button>
-                                            <Link href={'/editground/'+mygrounds[currentIndex].groundName} className="mainButtons editbutton flex items-center justify-center"><span>Edit Ground</span></Link>
+                                            <Link href={'/editground/' + mygrounds[currentIndex].groundName} className="mainButtons editbutton flex items-center justify-center"><span>Edit Ground</span></Link>
                                         </div>
+
                                     </div>
                                 }
                             </div>
                         </div>
                     </div>
-                    <div className="flex lg:hidden"> {/*for small devices*/}
-                        <span>Small Device</span>
+                    <div className="flex lg:hidden w-full h-full p-1"> {/*for small devices*/}
+                        {mygrounds[currentIndex]
+                            &&
+                            <div className="myGroundSmallDeviesMainContainer" style={{ backgroundImage: `url(${mygrounds[currentIndex].image && `data:image/png;base64,${mygrounds[currentIndex].image}`})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+                                <div className="w-full h-full flex flex-col justify-around items-center bg-opacity-40 bg-black">
+                                    <div className="w-full flex flex-col gap-2">
+                                        <div className="w-full flex justify-center">
+                                            <span className="smallDevicesSpan underline overline">{mygrounds[currentIndex].groundName}</span>
+                                        </div>
+                                        <div className="w-full flex justify-between p-3">
+                                            <Link className="smallDeviesButton" href={'addground'}> Add Ground</Link>
+                                            <button className="smallDeviesButton" onClick={handleRefresh}> Refresh </button>
+                                        </div>
+                                    </div>
+                                    <div className="smallDeviceGroundDetailsContainer">
+                                        <div>
+                                            <label className="smallDevicesLabel">Location: </label>
+                                            <span className="smallDevicesSpan">{mygrounds[currentIndex].groundLocation}</span>
+                                        </div>
+                                        <div>
+                                            <label className="smallDevicesLabel">Owner: </label>
+                                            <span className="smallDevicesSpan">{mygrounds[currentIndex].addedBy}</span>
+                                        </div>
+                                        <div>
+                                            <label className="smallDevicesLabel">Price: </label>
+                                            <span className="smallDevicesSpan">{mygrounds[currentIndex].price}</span>
+                                        </div>
+                                        <div>
+                                            <label className="smallDevicesLabel">Description: </label>
+                                            <span className="smallDevicesSpan">{mygrounds[currentIndex].description}</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-full">
+                                        <div className="w-full flex justify-between p-3">
+                                            <button className="smallDeviesButton" onClick={handleDeleteButton}>Delete Ground</button>
+                                            <Link href={'/editground/' + mygrounds[currentIndex].groundName} className="smallDeviesButton"><span>Edit Ground</span></Link>
+                                        </div>
+                                        <div className="w-full flex justify-between px-[30%]">
+                                            <button className={`smallDeviesButton ${currentIndex===0?'cursor-not-allowed':''}`} onClick={() => { currentIndex>0?setCurrentIndex(currentIndex - 1):null }}>Previous</button>
+                                            <button className={`smallDeviesButton ${currentIndex===(mygrounds.length-1)?'cursor-not-allowed':''}`} onClick={() => { currentIndex<(mygrounds.length-1)?setCurrentIndex(currentIndex + 1):null }}>Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             }

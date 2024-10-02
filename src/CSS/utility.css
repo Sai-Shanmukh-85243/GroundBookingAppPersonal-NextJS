@@ -34,9 +34,11 @@
 
 .jumpingBall {
     animation: jumping linear 2s;
+    pointer-events: none;
 }
 
 @keyframes jumping {
+
     0% {
         transform: translateX(-200%) translateY(0%);
 

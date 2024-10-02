@@ -52,7 +52,7 @@ const Nav = () => {
 
     return (
         <div>
-            <nav className="hidden md:flex md:justify-between items-center gap-4">
+            <nav className="hidden lg:flex lg:justify-between items-center gap-4">
                 <div className="flex gap-4 ">
                     {navLinks.map((ele) => {
                         return (
@@ -89,13 +89,13 @@ const Nav = () => {
 
             {/* for devices smaller than xl */}
             <nav>
-                <div className="flex md:hidden flex-row-reverse">
+                <div className="flex lg:hidden flex-row-reverse">
                     <Image onClick={() => { setShowMenuItems((prevState) => { return !prevState }) }} className="hover:cursor-pointer" src={'/icons/menu.svg'} alt='menu' width={30} height={30} />
                 </div>
                 {
                     showMenuItems
                     &&
-                    <div className="flex md:hidden w-auto flex-col gap-4  items-center text-center p-3 bg-slate-100 fixed right-0 rounded-md z-50">
+                    <div className="flex lg:hidden min-w-32 w-[20%] flex-col gap-4  items-center text-center p-3 bg-slate-100 fixed right-0 rounded-md z-[100]">
                         <div className="flex flex-col gap-4 ">
                             {navLinks.map((ele) => {
                                 return (
@@ -107,6 +107,13 @@ const Nav = () => {
                             isLoggedIn.status
                                 ?
                                 <div className="flex flex-col gap-4">
+                                    {loginData.role.toLowerCase().includes('admin')
+                                        ?
+                                        <Link onClick={() => { setShowMenuItems(false) }} href='/mygrounds' className={`nav_text whitespace-nowrap  ${isActive('/mygrounds') ? ' active_path_nav_text' : ''}`}>My Grounds</Link>
+                                        :
+                                        null
+                                    }
+
                                     <button onClick={() => { setShowMenuItems(false); HandleLogout() }} className="nav_text">Logout</button>
                                     <span onClick={() => { setShowMenuItems(false) }} className="nav_text zoom_text">{isLoggedIn.username ? isLoggedIn.username : 'NA'}</span>
                                     <span onClick={() => { setShowMenuItems(false) }} className="nav_text zoom_text">{isLoggedIn.role ? isLoggedIn.role.slice(1, -1) : 'NA'}</span>

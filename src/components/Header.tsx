@@ -22,7 +22,7 @@ const Header = () => {
                         </div>
                     </Link>
                 </div>
-                <div className="flex-grow md:mx-20">
+                <div className="flex-grow lg:mx-20">
                     <Nav />
                 </div>
               
