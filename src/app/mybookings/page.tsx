@@ -16,6 +16,8 @@ const html2pdf = require('html2pdf.js');
 const pdfmake = require('pdfmake');
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import MyBookingPDFDownload from "@/components/MyBookingPDFDownload";
 
 const MyBookings = () => {
     const contentRef = useRef(null);
@@ -137,7 +139,7 @@ const MyBookings = () => {
 
     function handleDownloadHTML2PDF() {
         const content = contentRef.current
-        let filename = MyBookingReverse[index].groundDetails.groundName+"-"+MyBookingReverse[index].date+"-"+MyBookingReverse[index].startTime+ '.pdf'
+        let filename = MyBookingReverse[index].groundDetails.groundName + "-" + MyBookingReverse[index].date + "-" + MyBookingReverse[index].startTime + '.pdf'
         var options = {
             filename: filename,
             margin: 0.8,
@@ -155,6 +157,26 @@ const MyBookings = () => {
 
         html2pdf().set(options).from(content).save();
 
+    }
+
+    async function handleDownloadReactPDF() {
+        try {
+            const response = await fetch('/api/my-booking/1', {
+                method: 'POST'
+            }); // Adjust the path and index as needed
+            const blob = await response.blob();
+            const fileName = `${MyBookingReverse[index].groundDetails.groundName}.pdf`;
+
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = window.URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        catch {
+            alert("Error when generating pdf");
+        }
     }
 
     function handleDownloadHTML2CanvasAndPDFMake() {
@@ -175,24 +197,24 @@ const MyBookings = () => {
 
     }
 
-    function handleDownloadJSPDF(){
+    function handleDownloadJSPDF() {
         let doc = new jsPDF('l', 'mm', [595, 842]);
         let pdf = document.getElementById("MyBooking")!;
         //console.log(pdf);
-        doc.html(pdf,{
-            callback: function(doc) {
-                doc.save(MyBookingReverse[index].groundDetails.groundName+'.pdf');
+        doc.html(pdf, {
+            callback: function (doc) {
+                doc.save(MyBookingReverse[index].groundDetails.groundName + '.pdf');
             },
             x: 10,
             y: 10
         });
-       // doc.save("save.pdf");
+        // doc.save("save.pdf");
     }
 
     return (
         <div className="h-full w-full">
             {!loginDetails.status ?
-                <PromptLogin /> :
+                <PromptLogin messagePrefix="See Your Bookings" /> :
                 <div className="flex h-full w-full">
                     {!MyBookingStatus ?
                         <Loading /> :
@@ -211,8 +233,14 @@ const MyBookings = () => {
                                         </div>
                                         <div className="basis-1/12 self-end">
                                             <div className="flex gap-3">
-                                                <button className="bg-blue-500 text-white p-1 rounded-md text-[0.8rem] hover:bg-blue-300" onClick={handleDownloadHTML2PDF}>Download</button>
-                                                <button className="bg-blue-500 text-white p-1 rounded-md text-[0.8rem] hover:bg-blue-300" onClick={handleRefresh}>Refresh</button>
+                                                <button className="toprightbuttons" onClick={handleDownloadHTML2PDF}>Download as Image</button>
+                                                <PDFDownloadLink
+                                                    className="toprightbuttons hover:cursor-pointer"
+                                                    fileName={`${MyBookingReverse[index].groundDetails.groundName}-${MyBookingReverse[index].date}-${MyBookingReverse[index].startTime}`}
+                                                    document={<MyBookingPDFDownload BookingDetails={MyBookingReverse[index]} />}>
+                                                    Download
+                                                </PDFDownloadLink>
+                                                <button className="toprightbuttons" onClick={handleRefresh}>Refresh</button>
                                             </div>
                                         </div>
                                         <div id="MyBooking" className={"basis-9/12 m-5 sm:mt-0"} ref={contentRef} >

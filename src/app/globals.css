@@ -4,9 +4,16 @@
 @import url('../CSS/dialogbox.css');
 @import url('../CSS/addground.css');
 @import url('../CSS/bookground.css');
+@import url('../CSS/mybookings.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  img{
+    display: initial;
+  }
+}
 
 .gradient {
   height: fit-content;
