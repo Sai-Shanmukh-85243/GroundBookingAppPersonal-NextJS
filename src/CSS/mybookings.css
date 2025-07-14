@@ -1,0 +1,3 @@
+.toprightbuttons{
+    @apply bg-blue-500 text-white p-1 rounded-md text-[0.8rem] hover:bg-blue-300;
+}

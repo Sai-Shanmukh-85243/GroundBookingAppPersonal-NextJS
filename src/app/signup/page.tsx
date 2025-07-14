@@ -1,7 +1,137 @@
 'use client'
+
+import { signupInputModel } from "@/models/signupInputModel";
+import { useAppDispatch } from "@/redux/hook";
+import { setPopup } from "@/redux/slices/popupSlice";
+import { addSignUp } from "@/redux/slices/signupSlice";
+import { useState } from "react";
+
 const SignUp = () => {
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+
+    const [location, setLocation] = useState("");
+    const [mobileNumber, setMobileNumber] = useState("");
+    const [secondaryEmail, setSecondaryEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [dateOfBirth, setDateOfBirth] = useState("");
+    const [role, setRole] = useState("User");
+
+    const [passwordError, setPasswordError] = useState(false);
+    const [dateError, setDateError] = useState(false);
+
+    const dispatch = useAppDispatch();
+
+    const handleDateChange = (date: string) => {
+        //alert(date)
+        var date1 = new Date(date);
+        //alert(date1)
+        let givenDate = date1.toISOString().split("T")[0];
+        let dateObj = new Date();
+        let currentdate = dateObj.toISOString();
+        if (currentdate.split("T")[0] < givenDate) {
+            dispatch(setPopup({message:'Please select valid DOB' , show:true,type:'danger'}))
+            setDateError(true);
+            setDateOfBirth("");
+        }
+        else {
+            setDateOfBirth(date1.toISOString().split("T")[0]);
+            setDateError(false)
+        }
+    };
+
+    function checkPassword() {
+        const passwordCaptialLetterRegex = new RegExp("^.*[A-Z]+.*$");
+        const passwordSmallLetterRegex = new RegExp("^.*[a-z]+.*$");
+        const passwordNumberRegex = new RegExp("^.*[0-9]+.*$");
+        const passwordSpecialCharacterRegex = new RegExp("^.*[^A-Za-z0-9]+.*$");
+        if (!passwordCaptialLetterRegex.test(password) ||
+            !passwordSmallLetterRegex.test(password) ||
+            !passwordNumberRegex.test(password) ||
+            !passwordSpecialCharacterRegex.test(password)) {
+            dispatch(setPopup({ message: "Password Must contain atleast 1 uppercase,1 lowercase,1 number and 1 special character", type: 'danger', show: true }))
+            setPasswordError(true);
+        }
+    }
+
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+
+        const mobileNumberRegex = new RegExp("^[0-9]{10}$");
+        const userNameRegex = new RegExp(/^\w{3,}$/);
+        const emailRegex = /^\w+@\w+\.\w+$/;
+        if (firstName === "" ||
+            lastName === "" ||
+            email === "" ||
+            location === "" ||
+            mobileNumber === "" ||
+            dateOfBirth === "Select Date" ||
+            username === "" ||
+            password === "" ||
+            confirmPassword === "" ||
+            role === "") {
+            dispatch(setPopup({ message: "Please fill all the mandatory field", type: 'danger', show: true }))
+        }
+        else if (dateError) {
+            dispatch(setPopup({ message: "Plese select a valid date", show: true, type: "danger" }))
+        }
+        else if (password !== confirmPassword) {
+            dispatch(setPopup({ message: "Password and Confirm Password donot match", type: 'danger', show: true }))
+        }
+        else if (!mobileNumberRegex.test(mobileNumber)) {
+            dispatch(setPopup({ message: "Mobile number can only contain numbers and must have 10 digits", type: 'danger', show: true }))
+        }
+        else if (!emailRegex.test(email)) {
+            dispatch(setPopup({ message: "Email format is invalid", type: 'danger', show: true }))
+        }
+        else if (((secondaryEmail) && !emailRegex.test(secondaryEmail))) {
+            dispatch(setPopup({ message: "Secondary Email format is invalid", type: 'danger', show: true }))
+        }
+        else if (!userNameRegex.test(username)) {
+            dispatch(setPopup({ message: "Username must have atleast 3 character and cannot contain special characters", type: 'danger', show: true }))
+        }
+        else if (passwordError) {
+            dispatch(setPopup({ message: "Password format is invalid,Password Must contain atleast 1 uppercase,1 lowercase,1 number and 1 special character", type: 'danger', show: true }))
+        }
+        else {
+            const signUpDetails: signupInputModel = {
+                firstname: firstName,
+                lastname: lastName,
+                email: email,
+                user_location: location,
+                mobile_number: mobileNumber,
+                date_of_birth: dateOfBirth,
+                created_by: username,
+                modified_by: username,
+                secondary_emailid: secondaryEmail,
+                userCredentials: {
+                    username: username,
+                    password: password,
+                    role: {
+                        roleName: role
+                    }
+                }
+            }
+            //console.log("in signup func")
+            dispatch(addSignUp(signUpDetails));
+            //props.navigation.navigate('Login');
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setLocation('');
+            setMobileNumber('');
+            setDateOfBirth('');
+            setSecondaryEmail('');
+            setUsername('');
+            setPassword('');
+            setConfirmPassword('');
+            setRole('User');
+        }
+
     }
     return (
         <div className="flex basis-full h-full flex-grow justify-center items-center ">
@@ -13,35 +143,35 @@ const SignUp = () => {
                                 <span className="form_label">
                                     First Name
                                 </span>
-                                <input className="form_input mb-2" type='text'>
+                                <input value={firstName} onChange={(e) => { setFirstName(e.target.value) }} required className="form_input mb-2" type='text'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Last Name
                                 </span>
-                                <input className="form_input mb-2" type='text'>
+                                <input value={lastName} onChange={(e) => { setLastName(e.target.value) }} required className="form_input mb-2" type='text'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Email
                                 </span>
-                                <input className="form_input mb-2" type='email'>
+                                <input value={email} onChange={(e) => { setEmail(e.target.value) }} required className="form_input mb-2" type='email'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Location
                                 </span>
-                                <textarea rows={5} className="form_input mb-2">
+                                <textarea value={location} onChange={(e) => { setLocation(e.target.value) }} required rows={5} className="form_input mb-2">
                                 </textarea>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Mobile Number
                                 </span>
-                                <input className="form_input mb-2" type='number'>
+                                <input value={mobileNumber} onChange={(e) => { setMobileNumber(e.target.value) }} required className="form_input mb-2" type='text'>
                                 </input>
                             </label>
                         </div>
@@ -50,44 +180,44 @@ const SignUp = () => {
                                 <span className="form_label">
                                     Date of Birth
                                 </span>
-                                <input className="form_input mb-2" type='date'>
+                                <input value={dateOfBirth} onChange={(e) => { setDateOfBirth(e.target.value); handleDateChange(e.target.value) }} required className="form_input mb-2" type='date'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
-                                    Secondary email
+                                    Secondary email<span className="text-[0.5rem]">&nbsp;{'(optional)'}</span>
                                 </span>
-                                <input className="form_input mb-2" type='email'>
+                                <input value={secondaryEmail} onChange={(e) => { setSecondaryEmail(e.target.value) }} className="form_input mb-2" type='email'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Username
                                 </span>
-                                <input className="form_input mb-2" type='text'>
+                                <input value={username} onChange={(e) => { setUsername(e.target.value) }} required className="form_input mb-2" type='text'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Password
                                 </span>
-                                <input className="form_input mb-2" type='password'>
+                                <input onBlur={checkPassword} value={password} onChange={(e) => { setPassword(e.target.value),setPasswordError(false) }} required className="form_input mb-2" type='password'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Confirm Password
                                 </span>
-                                <input className="form_input mb-2" type='password'>
+                                <input value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value) }} required className="form_input mb-2" type='password'>
                                 </input>
                             </label>
                             <label>
                                 <span className="form_label">
                                     Role
                                 </span>
-                                <select className="form_input mb-2">
-                                    <option value={1}>User</option>
-                                    <option value={2}>Admin</option>
+                                <select value={role} onChange={(e) => { setRole(e.target.value) }} className="form_input mb-2">
+                                    <option value={'User'} label="User"></option>
+                                    <option value={'Admin'} label="Admin"></option>
                                 </select>
                             </label>
                             {/* <!-- Component Start --> */}

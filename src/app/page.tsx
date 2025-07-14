@@ -17,13 +17,14 @@ export default function Home() {
           <span className="points font-serif">So, gather your team, lace up your sneakers, and come create unforgettable memories on our field. Book now and let the games begin!</span>
         </div>
         <div className="hidden xl:flex justify-center w-full h-full">
-          <div className="card">
+          {/* <div className="card"> */}
+          <div className="CardWithoutFlip">
             <div className="homeCardFront">
-              <Image src='/images/football3.png' alt='football' layout="fill"/>
+              <Image className="homeCardFrontImage jumpingBall" src='/images/football3.png' alt='football' fill/>
             </div>
-            <div className="homeCardBack">
-            <Image src='/images/football3.png' alt='football' layout="fill"/>
-            </div>
+            {/* <div className="homeCardBack">
+            <Image className="homeCardBackImage" src='/images/football3.png' alt='football' fill/>
+            </div> */}
           </div>
         </div>
       </div>
@@ -38,7 +39,7 @@ export default function Home() {
         </Link>
       </div>
       <div className="-z-10 opacity-10">
-        <Image src='/images/football1.png' alt='football' layout="fill" />
+        <Image src='/images/football1.png' alt='football' fill />
       </div>
     </div>
   );

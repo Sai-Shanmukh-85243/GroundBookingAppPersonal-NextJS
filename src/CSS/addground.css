@@ -1,0 +1,61 @@
+   .addgroundContainer {
+       display: grid;
+       justify-items: center;
+       align-items: center;
+       grid-area: mainContainer;
+       grid-template-areas:
+           'Header Header'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'FormContents FormContents'
+           'Footer Footer';
+   }
+
+   .addGroundHeader {
+       grid-area: Header;
+       @apply font-serif text-2xl text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text
+   }
+
+   .addGroundFormContents {
+       grid-area: FormContents;
+       box-shadow: 10px 10px 20px black,-10px -10px 80px slategrey;
+       @apply bg-slate-400 p-5 rounded-lg;
+   }
+
+   .addGroundFooter {
+       grid-area: Footer;
+   }
+
+   .addGroundFormContents div label{
+    @apply font-bold
+   }
+
+   .addGroundFormContents div input{
+    box-shadow: 1px 1px 10px white;
+    @apply rounded-md p-2;
+   }
+
+   .addGroundFormContents div input[type='file']{
+    box-shadow: none;
+    @apply border-none text-slate-700
+   }
+
+   .addGroundFormContents div input[type='number']{
+    appearance: none;
+   }
+
+   .addGroundFormContents div input[type='file']::file-selector-button{
+    @apply text-sm font-semibold rounded-lg border-none mr-1 bg-pink-500
+   }
+
+   .addGroundButton{
+    @apply border-[1px] p-2 mt-3 rounded-lg bg-green-400 hover:bg-violet-400
+   }
+
+   .goback{
+    @apply border-black border-2 p-2 rounded-lg bg-blend-darken bg-blue-700 text-white
+        hover:bg-white hover:text-blue-700
+   }
+

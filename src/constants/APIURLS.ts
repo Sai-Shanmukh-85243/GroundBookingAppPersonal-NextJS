@@ -1,0 +1,11 @@
+const rootURL = "http://localhost:8888";
+export const loginURL = rootURL + "/auth/login";
+export const signupURL = rootURL + "/user/adduser";
+export const allgroundsURL = rootURL + "/ground/allgrounds";
+export const addbookingURL = rootURL + "/booking/addbooking";
+export const getmybookingsURL = rootURL + "/booking/mybookings";
+export const getmygroundsURL = rootURL + "/ground/getgroundbyaddedby/";
+export const deletemygroundsURL = rootURL + "/ground/deleteground";
+export const addmygroundURL = rootURL + '/ground/addground';
+export const getgroundbynameURL = rootURL + '/ground/getgroundbyname';
+export const updategroundURL = rootURL + '/ground/updateground';
